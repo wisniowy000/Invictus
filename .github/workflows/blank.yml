@@ -15,8 +15,8 @@ jobs:
         
       - name: Get container ID
         run: |
+              docker container ls -a | grep 'get-cpu-info' | awk '{print $1}'
               containerID=$(docker container ls -a | grep 'get-cpu-info' | awk '{print $1}')
-              export CONTAINERID=$containerID
       - name: Echo
         run: echo $CONTAINERID
       - name: Copy file from Docker container
