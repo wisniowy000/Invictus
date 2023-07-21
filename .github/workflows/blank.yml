@@ -9,9 +9,12 @@ jobs:
 
       - name: Build the Docker image
         run: docker build . --file docker/Dockerfile --tag get-cpu-info:latest
+        
       - name: Run the Docker image
         run: docker run -d get-cpu-info:latest
+        
       - name: Copy file from Docker container
         run: docker cp get-cpu-info:/cpuinfo .
+        
       - name: Check content
         run: cat cpuinfo
