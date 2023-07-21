@@ -13,14 +13,8 @@ jobs:
       - name: Run the Docker image
         run: docker run -d get-cpu-info:latest
         
-      - name: Get container ID
-        run: |
-              docker container ls -a | grep 'get-cpu-info' | awk '{print $1}'
-              containerID=$(docker container ls -a | grep 'get-cpu-info' | awk '{print $1}')
-      - name: Echo
-        run: echo $CONTAINERID
       - name: Copy file from Docker container
-        run: docker cp $containerID:/cpuinfo .
+        run: docker cp $(docker container ls -a | grep 'get-cpu-info' | awk '{print $1}'):/cpuinfo .
         
       - name: Check content
         run: cat cpuinfo
