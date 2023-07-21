@@ -14,10 +14,11 @@ jobs:
         run: docker run -d get-cpu-info:latest
         
       - name: Get container ID
-        run: containerID=$(docker ps -aqf "name=get-cpu-info")
-
+        run: |
+              docker ps -aqf "name=get-cpu-info"
+              containerID=$(docker ps -aqf "name=get-cpu-info")
       - name: Copy file from Docker container
-        run: docker cp $containerID:/cpuinfo .
+        run: docker cp '$containerID':/cpuinfo .
         
       - name: Check content
         run: cat cpuinfo
