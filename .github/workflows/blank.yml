@@ -14,9 +14,11 @@ jobs:
         run: docker run -d get-cpu-info:latest
         
       - name: Get container ID
-        run: containerID=$(docker container ls -a | grep 'get-cpu-info' | awk '{print $1}')
+        run: |
+              containerID=$(docker container ls -a | grep 'get-cpu-info' | awk '{print $1}')
+              export CONTAINERID=$containerID
       - name: Echo
-        run: echo $containerID
+        run: echo $CONTAINERID
       - name: Copy file from Docker container
         run: docker cp $containerID:/cpuinfo .
         
