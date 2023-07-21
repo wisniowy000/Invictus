@@ -6,6 +6,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
-      - name: Run a one-line script
-        run: cat /proc/cpuinfo
+
+      - name: Build the Docker image
+        run: docker build --file docker/Dockerfile --tag get-cpu-info:$(date +%s)
