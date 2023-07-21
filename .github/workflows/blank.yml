@@ -15,6 +15,7 @@ jobs:
         
       - name: Get container ID
         run: |
+              docker ps -a
               docker ps -aqf "name=get-cpu-info"
               containerID=$(docker ps -aqf "name=get-cpu-info")
       - name: Copy file from Docker container
