@@ -11,6 +11,11 @@ var minutes := 0.0
 var days = 1
 var paused = true
 
+const FULLDAYCYCLE = 24
+
+func _ready():
+	start()
+
 func start():
 	paused = false
 
@@ -23,7 +28,6 @@ func _process(delta):
 	tick_counter += delta
 	if tick_counter >= tick_rate:
 		seconds += 1
-		emit_signal("tick")
 		tick_counter = 0
 		
 	if seconds >= 60:

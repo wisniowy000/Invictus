@@ -7,6 +7,7 @@ extends CharacterBody3D
 
 @onready var cam = $View
 @onready var ray = %Interact
+@onready var tools = %Tools
 
 var mouse_input = Vector2()
 var y_velocity = Vector3()
@@ -25,6 +26,7 @@ func _physics_process(delta):
 			y_velocity.y = JUMP_VELOCITY
 	else:
 		y_velocity.y -= GRAVITY * delta
+	velocity += y_velocity
 	
 	# Camera Rotation
 	rotation_degrees.y -= LOOK_SPEED * mouse_input.x * delta
@@ -32,6 +34,9 @@ func _physics_process(delta):
 	cam.rotation_degrees.x = clamp(cam.rotation_degrees.x,-80,80)
 	
 	move_and_slide()
+	
+	if Input.is_action_just_pressed("use"):
+		use_item()
 	
 	# Pause
 	if Input.is_action_just_pressed("pause"):
@@ -52,6 +57,6 @@ func interact():
 func _input(event):
 	if event is InputEventMouseMotion:
 		mouse_input = event.relative
-		
-	
-	
+
+func use_item():
+	tools.use_active_tool()
